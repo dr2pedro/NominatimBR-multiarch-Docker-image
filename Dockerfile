@@ -129,7 +129,7 @@ RUN echo "Set disable_coredump false" >> /etc/sudo.conf && \
 # setting this in the root as a volume instance.
 VOLUME /var/lib/postgresql/12/main
 
-# exposing the ports to conect
+# exposing the ports to conect:postgres e apache
 EXPOSE 5432
 EXPOSE 8080
 
