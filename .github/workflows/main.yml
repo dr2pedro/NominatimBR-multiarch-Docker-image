@@ -11,6 +11,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: tentando logar no docker hub
       run: docker login -u "${{ secrets.DOCKER_USERNAME }}" --password "${{ secrets.DOCKER_PASSWORD }}"
-    - name: build da imagem
+    - name: build da imagem amd64
       run: |
-        docker buildx build --push --tag dr2p/nominatimbr:sudeste --platform linux/amd64,linux/arm64 .
+        docker buildx build --push --tag dr2p/nominatimbr:sudeste --platform linux/amd64 .
