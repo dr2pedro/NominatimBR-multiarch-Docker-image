@@ -1,4 +1,4 @@
-name: Build R base Image
+name: Build NominatimBR Image
 
 on:
   push:
