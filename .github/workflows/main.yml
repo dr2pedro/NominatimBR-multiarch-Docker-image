@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: desktop-dr2p
     steps:
     - uses: actions/checkout@v2
     - name: instalando buildx
