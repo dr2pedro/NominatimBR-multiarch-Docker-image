@@ -1,0 +1,22 @@
+#!bin/sh
+# Docker login, Windows variables.
+docker login -u USERNAME --password PASSWORD
+
+# Buildando Sudeste que é o default, amd64
+docker buildx build --push --tag dr2p/nominatimbr:amd64 --platform linux/amd64 .
+# arm64    
+docker buildx build --push --tag dr2p/nominatimbr:arm64 --platform linux/arm64 .
+# manifesto para sudeste    
+docker manifest create dr2p/nominatimbr:sudeste dr2p/nominatimbr:amd64 dr2p/nominatimbr:arm64
+# push do manifesto    
+docker manifest push dr2p/nominatimbr:sudeste
+
+
+# Buildando Sul, amd64
+# docker buildx build --build-arg BUILD_VERSION=sul --push --tag dr2p/nominatimbr:amd64 --platform linux/amd64 .
+# arm64    
+# docker buildx build --build-arg BUILD_VERSION=sul --push --tag dr2p/nominatimbr:arm64 --platform linux/arm64 .
+# manifesto para sudeste    
+# docker manifest create dr2p/nominatimbr:sul dr2p/nominatimbr:amd64 dr2p/nominatimbr:arm64
+# push do manifesto    
+# docker manifest push dr2p/nominatimbr:sul
