@@ -1,8 +1,7 @@
 # argument for download a required osm.pbf image, sudeste will be default
 ARG BUILD_VERSION=sudeste
-ARG ARCH=
 
-FROM ${ARCH}ubuntu:focal AS base
+FROM ubuntu:focal AS base
 
 # setting the enviroment variables
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -96,6 +95,8 @@ RUN mkdir data && \
 
 # take the build that has the osm.pbf desired and continue the process
 FROM branch-version-${BUILD_VERSION} AS after-condition
+
+FROM after-condition
 # sudo is complaining nowdays and that disable it.
 RUN echo "Set disable_coredump false" >> /etc/sudo.conf && \
     # creating a folder to stores the data unziped latter.
@@ -123,8 +124,7 @@ RUN echo "Set disable_coredump false" >> /etc/sudo.conf && \
     sudo chown -R postgres:postgres /data/postgresdata && \
     chmod 700 /data/postgresdata && \
     # Transfering the data
-    rsync -av /data/postgresdata /var/lib/postgresql/12/main && \
-    rm -rf /data/postgresdata/* 
+    cp -R /data/postgresdata /var/lib/postgresql/12/main
 
 # setting this in the root as a volume instance.
 VOLUME /var/lib/postgresql/12/main
